@@ -8,6 +8,7 @@ KUSTOMIZE := $(shell pwd)/bin/kustomize
 ARGOCD := $(shell pwd)/bin/argocd
 
 ARGOCD_VERSION = 2.8.3
+ARGOCD_IMAGE_UPDATER_VERSION = 0.12.2
 CERT_MANAGER_VERSION = 1.11.4
 
 .PHONY: get-argocd-password
@@ -40,6 +41,9 @@ clean:
 .PHONY: update-argocd
 update-argocd:
 	curl -sfL -o argocd/base/upstream/install.yaml https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/ha/install.yaml
+
+update-argocd-image-updater:
+	curl -sfL -o argocd-image-updater/base/upstream/install.yaml https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/v${ARGOCD_IMAGE_UPDATER_VERSION}/manifests/install.yaml
 
 .PHONY: update-cert-manager
 update-cert-manager:

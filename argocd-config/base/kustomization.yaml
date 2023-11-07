@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
 - anyapps.yaml
 - argocd-config.yaml
+- argocd-image-updater.yaml
 - argocd.yaml
 - cert-manager.yaml
