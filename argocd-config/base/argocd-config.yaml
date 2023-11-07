@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/kmdkuk/kind-cluster.git
+    repoURL: https://github.com/kmdkuk/argocd-test.git
     path: argocd-config/base
     targetRevision: main
   destination:
