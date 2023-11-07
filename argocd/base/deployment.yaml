@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  template:
+    spec:
+      containers:
+      - name: argocd-repo-server
+        image: quay.io/cybozu/argocd
+        imagePullPolicy: IfNotPresent
+        args:
+        - argocd-repo-server
+      initContainers:
+      - name: copyutil
+        image: quay.io/cybozu/argocd
+        imagePullPolicy: IfNotPresent
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-server
+spec:
+  template:
+    spec:
+      containers:
+      - name: argocd-server
+        image: quay.io/cybozu/argocd
+        imagePullPolicy: IfNotPresent
+        args:
+        - argocd-server
+        - --application-namespaces="*"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-dex-server
+spec:
+  template:
+    spec:
+      containers:
+      - name: dex
+        image: quay.io/cybozu/dex
+        imagePullPolicy: IfNotPresent
+      initContainers:
+      - name: copyutil
+        image: quay.io/cybozu/argocd
+        imagePullPolicy: IfNotPresent
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-notifications-controller
+spec:
+  template:
+    spec:
+      containers:
+      - name: argocd-notifications-controller
+        image: quay.io/cybozu/argocd
+        imagePullPolicy: IfNotPresent
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-redis-ha-haproxy
+spec:
+  template:
+    spec:
+      containers:
+      - name: haproxy
+        image: ghcr.io/cybozu/haproxy
+        imagePullPolicy: IfNotPresent
+      initContainers:
+      - name: config-init      
+        image: ghcr.io/cybozu/haproxy
+        imagePullPolicy: IfNotPresent
