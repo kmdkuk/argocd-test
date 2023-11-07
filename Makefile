@@ -19,7 +19,8 @@ setup: $(KUBECTL) $(KUSTOMIZE) $(ARGOCD)
 	@echo "setup argocd"
 	-@$(KUBECTL) create namespace argocd
 	$(KUSTOMIZE) build argocd/base/ | $(KUBECTL) apply -n argocd -f -
-	$(KUBECTL) wait -n argocd deploy/argocd-server --for condition=available --timeout 3m
+	$(KUBECTL) wait -n argocd deploy --all --for condition=available --timeout 3m
+	$(KUBECTL) wait -n argocd sts --all --for condition=available --timeout 3m
 	sleep 10
 	$(ARGOCD) login localhost:30080 --insecure --username admin --password $(shell make get-argocd-password)
 	$(ARGOCD) app create argocd-config --upsert --repo https://github.com/kmdkuk/argocd-test.git --path argocd-config/base \
