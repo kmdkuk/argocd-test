@@ -39,7 +39,7 @@ clean:
 
 .PHONY: update-argocd
 update-argocd:
-	curl -sfL -o argocd/base/upstream/install.yaml https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
+	curl -sfL -o argocd/base/upstream/install.yaml https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/ha/install.yaml
 
 .PHONY: update-cert-manager
 update-cert-manager:
