@@ -8,7 +8,7 @@ nodes:
   - containerPort: 30080
     hostPort: 30080
     protocol: TCP
-  # for grafana
+  # for nginx
   - containerPort: 30081
     hostPort: 30081
     protocol: TCP
