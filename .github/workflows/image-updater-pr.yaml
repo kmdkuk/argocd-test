@@ -24,7 +24,7 @@ jobs:
             | grep "image-updater/${repository}/${name}" \
             | awk '{print $1}')
           for num in ${pr_number}; do
-            gh pr close -d -c "new PR branch: ${{ github.ref_name }}" num
+            gh pr close -d -c "new PR branch: ${{ github.ref_name }}" $num
           done
   create-pull-request:
     runs-on: ubuntu-latest
