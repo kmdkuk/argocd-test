@@ -2,7 +2,7 @@ name: create image updater pull request
 on:
   push:
     branches:
-      - 'image-updater/*'
+      - 'image-updater/**'
 
 jobs:
   close-older-pull-request:
