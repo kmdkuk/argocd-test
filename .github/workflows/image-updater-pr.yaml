@@ -18,6 +18,7 @@ jobs:
           gh pr create --fill --base=main --head=${{ github.ref_name }}
   close-older-pull-request:
     runs-on: ubuntu-latest
+    needs: create-pull-request
     steps:
       - uses: actions/checkout@v4
       - name: Get old PR
@@ -36,5 +37,5 @@ jobs:
             | grep -v "${{ github.ref_name }}" \
             | awk '{print $1}')
           for num in ${pr_number}; do
-            gh pr close -d -c "new PR branch: #$(gh pr view ${{ github.ref_name }} --json number --jq .number)" $num
+            gh pr close -d -c "new PR: #$(gh pr view ${{ github.ref_name }} --json number --jq .number)" $num
           done
