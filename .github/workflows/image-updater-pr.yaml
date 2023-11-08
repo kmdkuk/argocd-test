@@ -25,16 +25,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           repository=$(echo ${{ github.ref_name }} | awk -F '/' '{print $2}')
-          name=$(echo ${{ github.ref_name }} | awk -F '/' '{print $3}')
+          image_name=$(echo ${{ github.ref_name }} | awk -F '/' '{print $3}')
           pr_number=$(gh pr list \
             --state open \
             --json number,headRefName \
             --jq ".[] |[.number, .headRefName]|@csv" \
             | awk -F, '{print $1,$2}' \
             | sed -e 's/"//g' \
-            | grep "image-updater/${repository}/${name}" \
-            | awk '{print $1}'
-            | grep -v "${{ github.ref_name }}")
+            | grep "image-updater/${repository}/${image_name}" \
+            | grep -v "${{ github.ref_name }}" \
+            | awk '{print $1})
           for num in ${pr_number}; do
             gh pr close -d -c "new PR branch: #$(gh pr view ${{ github.ref_name }} --json number --jq .number)" $num
           done
