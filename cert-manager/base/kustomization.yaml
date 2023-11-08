@@ -6,4 +6,4 @@ patchesStrategicMerge:
   - deployment.yaml
 images:
   - name: quay.io/cybozu/cert-manager
-    newTag: 1.11.4.1
+    newTag: 1.13.2.1
