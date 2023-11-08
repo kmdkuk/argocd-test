@@ -5,6 +5,17 @@ on:
       - 'image-updater/**'
 
 jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create a pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create --fill --base=main --head=${{ github.ref_name }}
   close-older-pull-request:
     runs-on: ubuntu-latest
     steps:
@@ -22,19 +33,8 @@ jobs:
             | awk -F, '{print $1,$2}' \
             | sed -e 's/"//g' \
             | grep "image-updater/${repository}/${name}" \
-            | awk '{print $1}')
+            | awk '{print $1}'
+            | grep -v "${{ github.ref_name }}")
           for num in ${pr_number}; do
-            gh pr close -d -c "new PR branch: ${{ github.ref_name }}" $num
+            gh pr close -d -c "new PR branch: #$(gh pr view ${{ github.ref_name }} --json number --jq .number)" $num
           done
-  create-pull-request:
-    runs-on: ubuntu-latest
-    needs: close-older-pull-request
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Create a pull request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr create --fill --base=main --head=${{ github.ref_name }}
