@@ -4,9 +4,11 @@ metadata:
   name: anyapps
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/write-back-method: argocd
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+    argocd-image-updater.argoproj.io/write-back-target: kustomization
     argocd-image-updater.argoproj.io/image-list: app=ghcr.io/kmdkuk/argocd-image-updater-test
     argocd-image-updater.argoproj.io/app.update-strategy: latest
+    argocd-image-updater.argoproj.io/git-branch: main:image-updater{{range .Images}}-{{.Name}}-{{.NewTag}}{{end}}
 spec:
   project: default
   source:
