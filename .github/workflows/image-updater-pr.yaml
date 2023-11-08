@@ -34,7 +34,7 @@ jobs:
             | sed -e 's/"//g' \
             | grep "image-updater/${repository}/${image_name}" \
             | grep -v "${{ github.ref_name }}" \
-            | awk '{print $1})
+            | awk '{print $1}')
           for num in ${pr_number}; do
             gh pr close -d -c "new PR branch: #$(gh pr view ${{ github.ref_name }} --json number --jq .number)" $num
           done
