@@ -28,8 +28,7 @@ jobs:
           done
   create-pull-request:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    needs: close-older-pull-request
     steps:
       - uses: actions/checkout@v4
         with:
