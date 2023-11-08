@@ -1,0 +1,37 @@
+name: create image updater pull request
+on:
+  push:
+    branches:
+      - 'image-updater/*'
+
+jobs:
+  close-older-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get old PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          repository=$(echo ${{ github.ref_name }} | awk -F '/' 'print $2')
+          name=$(echo ${{ github.ref_name }} | awk -F '/' 'print $2')
+          pr_number=$(gh pr list \
+            --state open \
+            --json number,headRefName \
+            --jq ".[] |[.number, .headRefName]|@csv" \
+            | awk -F, '{print $1,$2}' \
+            | sed -e 's/"//g' \
+            | grep "image-updater/${repository}/${name}" \
+            | awk '{print $1}')
+          for num in ${pr_number}; do
+            gh pr close -d -c "new PR branch: ${{ github.ref_name }}" num
+          done
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create a pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create --base=main --head=${{ github.ref_name }}
