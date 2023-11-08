@@ -13,8 +13,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          repository=$(echo ${{ github.ref_name }} | awk -F '/' 'print $2')
-          name=$(echo ${{ github.ref_name }} | awk -F '/' 'print $2')
+          repository=$(echo ${{ github.ref_name }} | awk -F '/' '{print $2}')
+          name=$(echo ${{ github.ref_name }} | awk -F '/' '{print $3}')
           pr_number=$(gh pr list \
             --state open \
             --json number,headRefName \
