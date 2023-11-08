@@ -1,5 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - service.yaml
-  - deployment.yaml
+- service.yaml
+- deployment.yaml
+images:
+- name: ghcr.io/kmdkuk/argocd-image-updater-test
+  newTag: 0.0.1-20231108082603
