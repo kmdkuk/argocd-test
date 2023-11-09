@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Decide tag name
         run: |
-          echo "TAG=$(cat image/TAG)-$(date '+%Y%m%d%H%M%S')" >> $GITHUB_ENV
+          echo "TAG=$(cat image/TAG)" >> $GITHUB_ENV
       - run: |
           sed -i s/TAG/${{ env.TAG }}/g image/index.html
       - name: Build and push
