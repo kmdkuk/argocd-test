@@ -1,8 +1,10 @@
 name: Docker build and push
 on:
   push:
-    branches-ignore:
-      - 'image-updater/**'
+    branches:
+      - 'main'
+    paths:
+      - 'image/**'
 
 jobs:
   build-push:
