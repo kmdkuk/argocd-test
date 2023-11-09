@@ -5,4 +5,4 @@ resources:
 - deployment.yaml
 images:
 - name: ghcr.io/kmdkuk/argocd-image-updater-test
-  newTag: 0.0.1-20231108085021
+  newTag: 0.0.2-20231109001710
