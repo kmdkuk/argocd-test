@@ -13,4 +13,4 @@ images:
   - name: quay.io/cybozu/redis
     newTag: 7.0.11.1
   - name: ghcr.io/cybozu/haproxy
-    newTag: 2.6.14.1
+    newTag: 2.6.14.2
