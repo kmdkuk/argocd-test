@@ -71,6 +71,6 @@ spec:
         image: ghcr.io/cybozu/haproxy
         imagePullPolicy: IfNotPresent
       initContainers:
-      - name: config-init      
+      - name: config-init
         image: ghcr.io/cybozu/haproxy
         imagePullPolicy: IfNotPresent
