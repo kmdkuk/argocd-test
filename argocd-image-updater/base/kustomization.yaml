@@ -5,3 +5,7 @@ resources:
 namespace: argocd
 patchesStrategicMerge:
   - configmap.yaml
+images:
+  - name: quay.io/argoprojlabs/argocd-image-updater
+    newName: argocd-image-updater
+    newTag: latest
