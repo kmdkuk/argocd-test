@@ -7,5 +7,5 @@ spec:
     spec:
       containers:
         - name: argocd-image-updater
-          image: argocd-image-updater:latest
+          image: ghcr.io/cybozu/argocd-image-updater:0.12.2.1
           imagePullPolicy: IfNotPresent
