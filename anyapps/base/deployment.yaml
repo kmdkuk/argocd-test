@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: ghcr.io/kmdkuk/argocd-image-updater-test:0.0.1
+        image: ghcr.io/kmdkuk/argocd-image-updater-test
         ports:
         - containerPort: 8080
