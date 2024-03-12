@@ -9,7 +9,7 @@ images:
   - name: quay.io/cybozu/argocd
     newTag: 2.8.6.1
   - name: quay.io/cybozu/dex
-    newTag: 2.37.0.2
+    newTag: 2.37.0.4
   - name: quay.io/cybozu/redis
     newTag: 7.0.11.2
   - name: ghcr.io/cybozu/haproxy
