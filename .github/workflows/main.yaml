@@ -32,7 +32,7 @@ jobs:
       - run: |
           sed -i s/TAG/${{ env.TAG }}/g image/index.html
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: image
           platforms: linux/amd64
